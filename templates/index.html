@@ -3,8 +3,32 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>VoiceCraft — Free TTS</title>
+<title>VoiceCraft — Free Text to Speech Converter | Natural AI Voices</title>
+<meta name="description" content="VoiceCraft is a free, unlimited text to speech converter with natural AI voices. Convert any text to MP3 instantly. No signup, no API key needed."/>
+<meta name="keywords" content="text to speech, free TTS, text to voice, MP3 download, audiobook maker, AI voice, speech synthesis, online TTS"/>
+<meta name="author" content="Faisal Hossain"/>
+<meta name="robots" content="index, follow"/>
+<meta property="og:title" content="VoiceCraft — Free Text to Speech Converter"/>
+<meta property="og:description" content="Convert any text to natural speech MP3 for free. Perfect for audiobooks, bedtime stories, and more."/>
+<meta property="og:type" content="website"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="VoiceCraft — Free Text to Speech"/>
+<meta name="twitter:description" content="Free unlimited text to speech with natural voices. Download MP3 instantly."/>
+<link rel="canonical" href="https://voicecraft-edge.onrender.com/"/>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "VoiceCraft",
+  "description": "Free unlimited text to speech converter with natural AI voices",
+  "url": "https://voicecraft-edge.onrender.com",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Web",
+  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+  "author": {"@type": "Person", "name": "Faisal Hossain"}
+}
+</script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -18,18 +42,16 @@
 }
 *{-webkit-font-smoothing:antialiased}
 body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;font-weight:300;min-height:100vh;overflow-x:hidden}
-body::after{content:'';position:fixed;inset:0;opacity:.35;pointer-events:none;z-index:999;
-  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E")}
-body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
-  background:repeating-linear-gradient(0deg,transparent,transparent 47px,rgba(62,207,178,0.018) 48px)}
+body::after{content:'';position:fixed;inset:0;opacity:.35;pointer-events:none;z-index:999;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E")}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;background:repeating-linear-gradient(0deg,transparent,transparent 47px,rgba(62,207,178,0.018) 48px)}
 .orb{position:fixed;border-radius:50%;pointer-events:none;filter:blur(110px);z-index:0}
 .orb1{width:500px;height:500px;background:radial-gradient(circle,rgba(62,207,178,0.08) 0%,transparent 70%);top:-150px;right:-100px;animation:drift 14s ease-in-out infinite}
 .orb2{width:350px;height:350px;background:radial-gradient(circle,rgba(139,108,247,0.07) 0%,transparent 70%);bottom:-80px;left:-80px;animation:drift 18s ease-in-out infinite reverse}
 @keyframes drift{0%,100%{transform:translate(0,0)}50%{transform:translate(25px,-35px)}}
-.wrap{position:relative;z-index:1;max-width:760px;margin:0 auto;padding:52px 22px 96px}
+.wrap{position:relative;z-index:1;max-width:780px;margin:0 auto;padding:52px 22px 0}
 
 /* header */
-header{margin-bottom:56px;animation:fadeUp .8s ease both}
+header{margin-bottom:48px;animation:fadeUp .8s ease both}
 .badge{display:inline-flex;align-items:center;gap:8px;background:var(--tealdim);border:1px solid rgba(62,207,178,.2);border-radius:100px;padding:5px 14px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--teal);margin-bottom:24px}
 .badge-dot{width:5px;height:5px;border-radius:50%;background:var(--teal);animation:pulse 1.8s ease infinite}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.3;transform:scale(.7)}}
@@ -45,7 +67,6 @@ h1 span{font-style:normal;background:linear-gradient(110deg,var(--teal),var(--te
 
 /* card */
 .card{background:var(--s2);border:1px solid var(--border);border-radius:var(--radius);padding:26px;margin-bottom:14px;transition:border-color .3s;animation:fadeUp .65s ease both}
-.card:nth-child(2){animation-delay:.07s}.card:nth-child(3){animation-delay:.14s}.card:nth-child(4){animation-delay:.21s}
 .card:hover{border-color:var(--border2)}
 
 /* textarea */
@@ -83,6 +104,9 @@ input[type=range]{-webkit-appearance:none;width:100%;height:34px;background:tran
 input[type=range]::-webkit-slider-runnable-track{height:3px;background:var(--border2);border-radius:3px}
 input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:17px;height:17px;border-radius:50%;background:var(--teal);margin-top:-7px;box-shadow:0 0 10px var(--tealglow);transition:transform .15s}
 input[type=range]:hover::-webkit-slider-thumb{transform:scale(1.25)}
+
+/* speed labels */
+.speed-labels{display:flex;justify-content:space-between;font-family:'DM Mono',monospace;font-size:9px;color:var(--muted2);margin-top:2px;padding:0 2px}
 
 /* convert btn */
 .convert-btn{width:100%;padding:19px;background:linear-gradient(135deg,#3ecfb2,#2aaf95);border:none;border-radius:15px;color:#061412;font-family:'Outfit',sans-serif;font-size:1rem;font-weight:600;letter-spacing:.4px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:11px;transition:all .25s;box-shadow:0 8px 30px rgba(62,207,178,.22);position:relative;overflow:hidden}
@@ -128,26 +152,60 @@ audio{width:100%;height:40px;border-radius:9px;filter:invert(1) hue-rotate(180de
 .hdl:hover{background:rgba(62,207,178,.18)}
 .empty{text-align:center;padding:32px;font-family:'DM Mono',monospace;font-size:11px;color:var(--muted2);letter-spacing:1px}
 
+/* features section */
+.features{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;margin-bottom:14px}
+.feat{background:var(--s2);border:1px solid var(--border);border-radius:14px;padding:20px;transition:border-color .2s}
+.feat:hover{border-color:var(--border2)}
+.feat-icon{font-size:1.6rem;margin-bottom:10px}
+.feat-title{font-size:.95rem;font-weight:500;margin-bottom:6px}
+.feat-desc{font-size:.82rem;color:var(--muted);line-height:1.6}
+
+/* modal */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:2000;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px)}
+.modal-overlay.open{display:flex}
+.modal{background:var(--s2);border:1px solid var(--border2);border-radius:24px;max-width:640px;width:100%;max-height:85vh;overflow-y:auto;padding:36px;position:relative;animation:fadeUp .3s ease both}
+.modal h2{font-family:'Instrument Serif',serif;font-size:2rem;font-style:italic;margin-bottom:20px;color:var(--text)}
+.modal h3{font-size:1rem;font-weight:600;color:var(--teal);margin:20px 0 8px;font-family:'DM Mono',monospace;letter-spacing:1px;text-transform:uppercase}
+.modal p,.modal li{font-size:.9rem;color:var(--muted);line-height:1.75;margin-bottom:8px}
+.modal ul{padding-left:20px}
+.modal-close{position:absolute;top:18px;right:20px;background:var(--s3);border:1px solid var(--border);border-radius:8px;padding:6px 12px;color:var(--muted);font-family:'DM Mono',monospace;font-size:11px;cursor:pointer;transition:all .2s}
+.modal-close:hover{color:var(--text);border-color:var(--border2)}
+
+/* footer */
+footer{background:var(--s1);border-top:1px solid var(--border);margin-top:60px;padding:40px 22px;position:relative;z-index:1}
+.footer-inner{max-width:780px;margin:0 auto}
+.footer-top{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:24px;margin-bottom:32px}
+.footer-brand h3{font-family:'Instrument Serif',serif;font-size:1.5rem;font-style:italic;color:var(--text);margin-bottom:6px}
+.footer-brand p{font-size:.82rem;color:var(--muted);max-width:260px;line-height:1.6}
+.footer-links{display:flex;gap:10px;flex-wrap:wrap}
+.footer-link{background:var(--s2);border:1px solid var(--border);border-radius:8px;padding:8px 16px;color:var(--muted);font-family:'DM Mono',monospace;font-size:11px;cursor:pointer;transition:all .2s;text-decoration:none;letter-spacing:.5px}
+.footer-link:hover{color:var(--teal);border-color:rgba(62,207,178,.3)}
+.footer-bottom{border-top:1px solid var(--border);padding-top:20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.footer-copy{font-family:'DM Mono',monospace;font-size:11px;color:var(--muted2)}
+.footer-copy a{color:var(--teal);text-decoration:none}
+.footer-copy a:hover{text-decoration:underline}
+.footer-badge{display:inline-flex;align-items:center;gap:6px;background:var(--tealdim);border:1px solid rgba(62,207,178,.2);border-radius:100px;padding:4px 12px;font-family:'DM Mono',monospace;font-size:10px;color:var(--teal)}
+
 @keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
-.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(70px);background:var(--s3);border:1px solid var(--border2);border-radius:100px;padding:11px 22px;font-family:'DM Mono',monospace;font-size:11px;color:var(--text);z-index:1000;transition:transform .3s,opacity .3s;opacity:0;white-space:nowrap}
+.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(70px);background:var(--s3);border:1px solid var(--border2);border-radius:100px;padding:11px 22px;font-family:'DM Mono',monospace;font-size:11px;color:var(--text);z-index:1000;transition:transform .3s,opacity .3s;opacity:0;white-space:nowrap;pointer-events:none}
 .toast.show{transform:translateX(-50%) translateY(0);opacity:1}
 </style>
 </head>
 <body>
 <div class="orb orb1"></div>
 <div class="orb orb2"></div>
-<div class="wrap">
 
+<div class="wrap">
   <header>
-    <div class="badge"><span class="badge-dot"></span>Google TTS · 100% Free</div>
+    <div class="badge"><span class="badge-dot"></span>Free · Unlimited · No Signup</div>
     <h1>Voice<span>Craft</span></h1>
-    <p class="tagline">Unlimited · Natural Voices · Auto Download <span class="free-pill">$0</span></p>
+    <p class="tagline">Text to Speech Converter — Natural Voices · Instant MP3 Download <span class="free-pill">$0</span></p>
   </header>
 
   <!-- TEXT -->
   <div class="sec">Your Text</div>
   <div class="card">
-    <textarea id="textInput" placeholder="Type or paste any English text here… completely free, no limits."></textarea>
+    <textarea id="textInput" placeholder="Type or paste any English text here… audiobooks, bedtime stories, articles — no character limit."></textarea>
     <div class="meta-row">
       <span class="char-pill" id="charPill">0 chars</span>
       <span class="free-note">✦ FREE · No API key · Unlimited</span>
@@ -166,29 +224,37 @@ audio{width:100%;height:40px;border-radius:9px;filter:invert(1) hue-rotate(180de
     </div>
     <div class="voice-grid" id="voiceGrid"></div>
 
+    <!-- SPEED CONTROL -->
     <div class="range-row">
       <div class="range-field">
         <div class="rl">
-          <label>Speaking Rate</label>
-          <span class="rv" id="rateVal">Normal</span>
+          <label>Speaking Speed</label>
+          <span class="rv" id="speedVal">Normal (1.0×)</span>
         </div>
-        <input type="range" id="rateRange" min="0" max="1" step="1" value="0"
-          oninput="document.getElementById('rateVal').textContent=this.value=='1'?'Slow':'Normal'"/>
+        <input type="range" id="speedRange" min="1" max="5" step="1" value="3"
+          oninput="updateSpeed(this.value)"/>
+        <div class="speed-labels">
+          <span>0.5× Slowest</span>
+          <span>0.75× Slow</span>
+          <span>1.0× Normal</span>
+          <span>1.25× Fast</span>
+          <span>1.5× Fastest</span>
+        </div>
       </div>
       <div class="range-field">
         <div class="rl">
-          <label>Accent</label>
-          <span class="rv" id="accentVal" style="color:var(--teal)">en-us</span>
+          <label>Selected Voice</label>
+          <span class="rv" id="accentVal">en-us</span>
         </div>
-        <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);padding-top:8px">
-          Selected voice accent shown above
+        <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);padding-top:10px;line-height:1.6">
+          Click a voice card above<br/>to change accent
         </div>
       </div>
     </div>
   </div>
 
   <!-- CONVERT -->
-  <div class="card" style="animation-delay:.28s">
+  <div class="card">
     <button class="convert-btn" id="convertBtn" onclick="convert()">
       <span class="ci">◆</span> Convert &amp; Download MP3 — Free
     </button>
@@ -210,29 +276,165 @@ audio{width:100%;height:40px;border-radius:9px;filter:invert(1) hue-rotate(180de
   </div>
 
   <!-- HISTORY -->
-  <div class="sec" style="margin-top:6px">History</div>
-  <div class="card" style="animation-delay:.35s">
+  <div class="sec">History</div>
+  <div class="card">
     <div class="hlist" id="hlist">
-      <div class="empty">No conversions yet</div>
+      <div class="empty">No conversions yet · Your history appears here</div>
     </div>
   </div>
 
+  <!-- FEATURES / SEO CONTENT -->
+  <div class="sec" style="margin-top:8px">Why VoiceCraft</div>
+  <div class="features">
+    <div class="feat">
+      <div class="feat-icon">🎙️</div>
+      <div class="feat-title">Natural Voices</div>
+      <div class="feat-desc">Powered by Google TTS engine for clear, natural-sounding speech in multiple English accents.</div>
+    </div>
+    <div class="feat">
+      <div class="feat-icon">📚</div>
+      <div class="feat-title">Audiobook Ready</div>
+      <div class="feat-desc">Perfect for creating audiobooks, bedtime stories, podcast scripts, and educational content.</div>
+    </div>
+    <div class="feat">
+      <div class="feat-icon">⚡</div>
+      <div class="feat-title">Instant Download</div>
+      <div class="feat-desc">Convert text to MP3 instantly. No waiting, no signup, no credit card required.</div>
+    </div>
+    <div class="feat">
+      <div class="feat-icon">∞</div>
+      <div class="feat-title">Unlimited Text</div>
+      <div class="feat-desc">No character limits. Convert short phrases or entire book chapters — completely free.</div>
+    </div>
+    <div class="feat">
+      <div class="feat-icon">🌍</div>
+      <div class="feat-title">8 English Accents</div>
+      <div class="feat-desc">US, UK, Australian, Canadian, Indian, Irish, New Zealand, and South African accents.</div>
+    </div>
+    <div class="feat">
+      <div class="feat-icon">🔒</div>
+      <div class="feat-title">Private & Secure</div>
+      <div class="feat-desc">Your text is never stored. Each conversion is processed and immediately discarded.</div>
+    </div>
+  </div>
 </div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <h3>VoiceCraft</h3>
+        <p>Free text to speech converter with natural AI voices. Perfect for audiobooks, stories, and content creation.</p>
+      </div>
+      <div class="footer-links">
+        <button class="footer-link" onclick="openModal('privacy')">Privacy Policy</button>
+        <button class="footer-link" onclick="openModal('terms')">Terms of Use</button>
+        <button class="footer-link" onclick="openModal('faq')">FAQ</button>
+        <a class="footer-link" href="http://wa.me/+8801719619698" target="_blank" rel="noopener">Contact</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">
+        © 2025 VoiceCraft · Developed by <a href="http://wa.me/+8801719619698" target="_blank" rel="noopener">Faisal Hossain</a> · All rights reserved.
+      </div>
+      <div class="footer-badge">✦ 100% Free Forever</div>
+    </div>
+  </div>
+</footer>
+
+<!-- PRIVACY MODAL -->
+<div class="modal-overlay" id="modal-privacy">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('privacy')">✕ Close</button>
+    <h2>Privacy Policy</h2>
+    <p>Last updated: January 2025</p>
+    <h3>Data Collection</h3>
+    <p>VoiceCraft does not collect, store, or share any personal data. We do not require account registration or login.</p>
+    <h3>Text Processing</h3>
+    <p>Text you enter is sent to our server solely to generate audio. It is not saved, logged, or used for any other purpose. Audio files are generated in memory and immediately returned to you.</p>
+    <h3>Cookies</h3>
+    <p>We do not use tracking cookies. Your voice preference may be saved locally in your browser's localStorage for convenience.</p>
+    <h3>Third-Party Services</h3>
+    <p>We use Google Text-to-Speech API for audio generation. Text is processed by Google's servers under their standard API terms. We do not share your data with any advertising or analytics services.</p>
+    <h3>Contact</h3>
+    <p>For any privacy concerns, contact us via WhatsApp: <a href="http://wa.me/+8801719619698" style="color:var(--teal)">+880 1719 619698</a></p>
+  </div>
+</div>
+
+<!-- TERMS MODAL -->
+<div class="modal-overlay" id="modal-terms">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('terms')">✕ Close</button>
+    <h2>Terms of Use</h2>
+    <p>Last updated: January 2025</p>
+    <h3>Acceptable Use</h3>
+    <ul>
+      <li>VoiceCraft is provided free of charge for personal and commercial use.</li>
+      <li>You may use generated audio for audiobooks, videos, podcasts, educational content, and other lawful purposes.</li>
+      <li>You are responsible for ensuring you have the rights to any text you convert.</li>
+    </ul>
+    <h3>Prohibited Use</h3>
+    <ul>
+      <li>Do not use VoiceCraft to create spam, misleading content, or impersonation audio.</li>
+      <li>Do not use the service to violate any applicable laws or regulations.</li>
+      <li>Do not attempt to overload, hack, or disrupt the service.</li>
+    </ul>
+    <h3>Disclaimer</h3>
+    <p>VoiceCraft is provided "as is" without warranties. We reserve the right to modify or discontinue the service at any time. We are not liable for any damages arising from use of this service.</p>
+    <h3>Contact</h3>
+    <p>Questions? Reach us on WhatsApp: <a href="http://wa.me/+8801719619698" style="color:var(--teal)">+880 1719 619698</a></p>
+  </div>
+</div>
+
+<!-- FAQ MODAL -->
+<div class="modal-overlay" id="modal-faq">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('faq')">✕ Close</button>
+    <h2>FAQ</h2>
+    <h3>Is VoiceCraft really free?</h3>
+    <p>Yes, 100% free. No signup, no credit card, no hidden fees. Convert unlimited text to speech at no cost.</p>
+    <h3>Is there a character limit?</h3>
+    <p>No. You can convert short sentences or entire book chapters. For very long texts (50,000+ chars), we recommend splitting into chapters for best results.</p>
+    <h3>What audio format is downloaded?</h3>
+    <p>All audio is downloaded as MP3 format, compatible with all devices and media players.</p>
+    <h3>Can I use the audio commercially?</h3>
+    <p>Yes. Audio generated by VoiceCraft can be used for commercial purposes including YouTube videos, podcasts, audiobooks, and more.</p>
+    <h3>Why does the first conversion take longer?</h3>
+    <p>Our free server may take 30–60 seconds to wake up after being idle. Subsequent conversions are fast.</p>
+    <h3>Which accent should I use for audiobooks?</h3>
+    <p>🇺🇸 US English or 🇬🇧 UK English are most popular for audiobooks and bedtime stories. Try both and pick your favorite!</p>
+    <h3>Can I change the speed?</h3>
+    <p>Yes! Use the Speaking Speed slider — choose from 0.5× (slowest) to 1.5× (fastest) to suit your content.</p>
+    <h3>Need help or custom features?</h3>
+    <p>Contact developer Faisal Hossain on WhatsApp: <a href="http://wa.me/+8801719619698" style="color:var(--teal)">+880 1719 619698</a></p>
+  </div>
+</div>
+
 <div class="toast" id="toast"></div>
 
 <script>
-// Backend URL — same origin (auto, no manual connect needed)
 const SERVER = window.location.origin;
 
+// Speed map: slider 1-5 → gTTS slow(true/false) + display label
+// gTTS only supports normal and slow — we simulate 5 steps via backend
+const SPEED_MAP = {
+  1: {slow:true,  label:'0.5× Slowest', send:'very_slow'},
+  2: {slow:true,  label:'0.75× Slow',   send:'slow'},
+  3: {slow:false, label:'1.0× Normal',  send:'normal'},
+  4: {slow:false, label:'1.25× Fast',   send:'fast'},
+  5: {slow:false, label:'1.5× Fastest', send:'very_fast'},
+};
+
 const VOICES = [
-  {id:"en-us", name:"US English",       accent:"US",    flag:"🇺🇸"},
-  {id:"en-gb", name:"UK English",       accent:"UK",    flag:"🇬🇧"},
-  {id:"en-au", name:"Australian",       accent:"AU",    flag:"🇦🇺"},
-  {id:"en-ca", name:"Canadian",         accent:"CA",    flag:"🇨🇦"},
-  {id:"en-in", name:"Indian English",   accent:"Other", flag:"🇮🇳"},
-  {id:"en-ie", name:"Irish English",    accent:"Other", flag:"🇮🇪"},
-  {id:"en-nz", name:"New Zealand",      accent:"Other", flag:"🇳🇿"},
-  {id:"en-za", name:"South African",    accent:"Other", flag:"🇿🇦"},
+  {id:"en-us", name:"US English",     accent:"US",    flag:"🇺🇸"},
+  {id:"en-gb", name:"UK English",     accent:"UK",    flag:"🇬🇧"},
+  {id:"en-au", name:"Australian",     accent:"AU",    flag:"🇦🇺"},
+  {id:"en-ca", name:"Canadian",       accent:"Other", flag:"🇨🇦"},
+  {id:"en-in", name:"Indian English", accent:"Other", flag:"🇮🇳"},
+  {id:"en-ie", name:"Irish English",  accent:"Other", flag:"🇮🇪"},
+  {id:"en-nz", name:"New Zealand",    accent:"Other", flag:"🇳🇿"},
+  {id:"en-za", name:"South African",  accent:"Other", flag:"🇿🇦"},
 ];
 
 let selectedVoice = "en-us";
@@ -242,8 +444,7 @@ let lastBlob = null;
 renderVoices(VOICES);
 
 function renderVoices(list){
-  const grid = document.getElementById('voiceGrid');
-  grid.innerHTML = list.map(v=>`
+  document.getElementById('voiceGrid').innerHTML = list.map(v=>`
     <div class="voice-card${v.id===selectedVoice?' selected':''}" onclick="selectVoice('${v.id}',this)">
       <div class="vc-name">${v.flag} ${v.name}</div>
       <div class="vc-meta">${v.id}</div>
@@ -253,8 +454,7 @@ function renderVoices(list){
 function filterVoices(f, btn){
   document.querySelectorAll('.ftab').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
-  const filtered = f==='all' ? VOICES : VOICES.filter(v=>v.accent===f);
-  renderVoices(filtered);
+  renderVoices(f==='all' ? VOICES : VOICES.filter(v=>v.accent===f));
 }
 
 function selectVoice(id, el){
@@ -262,6 +462,10 @@ function selectVoice(id, el){
   document.querySelectorAll('.voice-card').forEach(c=>c.classList.remove('selected'));
   el.classList.add('selected');
   document.getElementById('accentVal').textContent = id;
+}
+
+function updateSpeed(v){
+  document.getElementById('speedVal').textContent = SPEED_MAP[v].label;
 }
 
 document.getElementById('textInput').addEventListener('input',function(){
@@ -274,53 +478,45 @@ document.getElementById('textInput').addEventListener('input',function(){
 async function convert(){
   const text=document.getElementById('textInput').value.trim();
   if(!text){toast('⚠ Enter some text first');return}
-
   const btn=document.getElementById('convertBtn');
   btn.disabled=true;
   document.getElementById('result').classList.remove('show');
   showProg('Generating audio…',20);
 
-  const slow = document.getElementById('rateRange').value === '1';
+  const speedStep = parseInt(document.getElementById('speedRange').value);
+  const speedObj  = SPEED_MAP[speedStep];
 
   try{
     showProg('Connecting to Google TTS…',50);
     const res = await fetch(SERVER+'/synthesize',{
       method:'POST',
       headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({text, voice:selectedVoice, slow}),
-      signal: AbortSignal.timeout(60000)
+      body:JSON.stringify({text, voice:selectedVoice, slow:speedObj.slow, speed:speedObj.send}),
+      signal:AbortSignal.timeout(60000)
     });
-
     showProg('Processing audio…',85);
-
     if(!res.ok){
-      const err = await res.json().catch(()=>({error:'Server error '+res.status}));
+      const err=await res.json().catch(()=>({error:'Server error '+res.status}));
       throw new Error(err.error||'Server error');
     }
-
-    lastBlob = await res.blob();
-    const url = URL.createObjectURL(lastBlob);
+    lastBlob=await res.blob();
+    const url=URL.createObjectURL(lastBlob);
     showProg('Done!',100);
     setTimeout(hideProg,350);
-
     document.getElementById('audioEl').src=url;
     document.getElementById('result').classList.add('show');
-
-    const vname = VOICES.find(v=>v.id===selectedVoice)?.name||selectedVoice;
+    const vname=VOICES.find(v=>v.id===selectedVoice)?.name||selectedVoice;
     document.getElementById('dlBtn').onclick=()=>doDownload(lastBlob,vname);
-    doDownload(lastBlob, vname);
-
+    doDownload(lastBlob,vname);
     const kb=(lastBlob.size/1024).toFixed(1);
     document.getElementById('rmeta').innerHTML=`
       <div class="mi"><span>Accent</span><strong>${vname}</strong></div>
-      <div class="mi"><span>Speed</span><strong>${slow?'Slow':'Normal'}</strong></div>
+      <div class="mi"><span>Speed</span><strong>${speedObj.label}</strong></div>
       <div class="mi"><span>Size</span><strong>${kb} KB</strong></div>
       <div class="mi"><span>Chars</span><strong>${text.length.toLocaleString()}</strong></div>
       <div class="mi"><span>Cost</span><strong>$0.00 🎉</strong></div>`;
-
-    addHistory(text, vname, lastBlob);
+    addHistory(text,vname,speedObj.label,lastBlob);
     toast('✦ MP3 downloaded!');
-
   }catch(e){
     hideProg();
     toast('✖ '+e.message.slice(0,55));
@@ -329,15 +525,13 @@ async function convert(){
   }
 }
 
-function doDownload(blob, name){
+function doDownload(blob,name){
   const url=URL.createObjectURL(blob);
   const a=document.createElement('a');
-  a.href=url;
-  a.download=`voicecraft-${name.replace(/\s+/g,'-').toLowerCase()}-${Date.now()}.mp3`;
+  a.href=url;a.download=`voicecraft-${name.replace(/\s+/g,'-').toLowerCase()}-${Date.now()}.mp3`;
   document.body.appendChild(a);a.click();document.body.removeChild(a);
   setTimeout(()=>URL.revokeObjectURL(url),5000);
 }
-
 function showProg(msg,pct){
   document.getElementById('progWrap').classList.add('show');
   document.getElementById('progTxt').textContent=msg;
@@ -345,22 +539,27 @@ function showProg(msg,pct){
 }
 function hideProg(){document.getElementById('progWrap').classList.remove('show')}
 
-function addHistory(text, voice, blob){
-  history.unshift({text, voice, blob, time:new Date()});
-  const list=document.getElementById('hlist');
-  list.innerHTML=history.map((h,i)=>{
+function addHistory(text,voice,speed,blob){
+  history.unshift({text,voice,speed,blob,time:new Date()});
+  document.getElementById('hlist').innerHTML=history.map((h,i)=>{
     const s=h.text.length>65?h.text.slice(0,62)+'…':h.text;
     const t=h.time.toLocaleTimeString('en',{hour:'2-digit',minute:'2-digit'});
     return `<div class="hi">
       <span class="hn">${String(i+1).padStart(2,'0')}</span>
       <div class="hinfo">
         <div class="htxt">${s}</div>
-        <div class="hsub"><span>${h.voice}</span><span>${t}</span></div>
+        <div class="hsub"><span>${h.voice}</span><span>${h.speed}</span><span>${t}</span></div>
       </div>
       <button class="hdl" onclick="doDownload(history[${i}].blob,'${h.voice}')">⬇ MP3</button>
     </div>`;
   }).join('');
 }
+
+function openModal(id){document.getElementById('modal-'+id).classList.add('open')}
+function closeModal(id){document.getElementById('modal-'+id).classList.remove('open')}
+document.querySelectorAll('.modal-overlay').forEach(m=>{
+  m.addEventListener('click',e=>{if(e.target===m)m.classList.remove('open')})
+});
 
 function toast(msg){
   const el=document.getElementById('toast');
