@@ -259,24 +259,22 @@ audio{width:100%;height:40px;border-radius:9px;filter:invert(1) hue-rotate(180de
 
 <script>
 const VOICES = [
-  {id:"en-US-AriaNeural",      name:"Aria",          gender:"Female", accent:"US", style:"Natural, warm"},
-  {id:"en-US-JennyNeural",     name:"Jenny",         gender:"Female", accent:"US", style:"Friendly"},
-  {id:"en-US-SaraNeural",      name:"Sara",          gender:"Female", accent:"US", style:"Cheerful"},
-  {id:"en-US-NancyNeural",     name:"Nancy",         gender:"Female", accent:"US", style:"Pleasant"},
-  {id:"en-US-MichelleNeural",  name:"Michelle",      gender:"Female", accent:"US", style:"Warm"},
-  {id:"en-US-MonicaNeural",    name:"Monica",        gender:"Female", accent:"US", style:"Lively"},
-  {id:"en-US-GuyNeural",       name:"Guy",           gender:"Male",   accent:"US", style:"Deep, natural"},
-  {id:"en-US-ChristopherNeural",name:"Christopher",  gender:"Male",   accent:"US", style:"Reliable"},
-  {id:"en-US-EricNeural",      name:"Eric",          gender:"Male",   accent:"US", style:"Rational"},
-  {id:"en-US-RogerNeural",     name:"Roger",         gender:"Male",   accent:"US", style:"Lively"},
-  {id:"en-US-SteffanNeural",   name:"Steffan",       gender:"Male",   accent:"US", style:"Calm"},
-  {id:"en-GB-SoniaNeural",     name:"Sonia",         gender:"Female", accent:"UK", style:"British"},
-  {id:"en-GB-RyanNeural",      name:"Ryan",          gender:"Male",   accent:"UK", style:"British"},
-  {id:"en-AU-NatashaNeural",   name:"Natasha",       gender:"Female", accent:"AU", style:"Australian"},
-  {id:"en-AU-WilliamNeural",   name:"William",       gender:"Male",   accent:"AU", style:"Australian"},
+  {id:"en-us", name:"Aria (US)",      gender:"Female", accent:"US", style:"Natural, warm"},
+  {id:"en-us", name:"Jenny (US)",     gender:"Female", accent:"US", style:"Friendly"},
+  {id:"en-us", name:"Sara (US)",      gender:"Female", accent:"US", style:"Cheerful"},
+  {id:"en-gb", name:"Sonia (UK)",     gender:"Female", accent:"UK", style:"British"},
+  {id:"en-au", name:"Natasha (AU)",   gender:"Female", accent:"AU", style:"Australian"},
+  {id:"en-ca", name:"Clara (CA)",     gender:"Female", accent:"CA", style:"Canadian"},
+  {id:"en-in", name:"Neerja (IN)",    gender:"Female", accent:"IN", style:"Indian"},
+  {id:"en-ie", name:"Emily (IE)",     gender:"Female", accent:"IE", style:"Irish"},
+  {id:"en-nz", name:"Molly (NZ)",     gender:"Female", accent:"NZ", style:"New Zealand"},
+  {id:"en-za", name:"Ayanda (ZA)",    gender:"Female", accent:"ZA", style:"South African"},
+  {id:"en-us", name:"Guy (US)",       gender:"Male",   accent:"US", style:"Deep, natural"},
+  {id:"en-gb", name:"Ryan (UK)",      gender:"Male",   accent:"UK", style:"British"},
+  {id:"en-au", name:"William (AU)",   gender:"Male",   accent:"AU", style:"Australian"},
 ];
 
-let selectedVoice = "en-US-AriaNeural";
+let selectedVoice = "en-us";
 let history = [];
 let lastBlob = null;
 let serverUrl = localStorage.getItem('edge_server_url') || '';
