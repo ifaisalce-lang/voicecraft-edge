@@ -205,10 +205,10 @@ footer{background:var(--s1);border-top:1px solid var(--border);margin-top:60px;p
   <!-- TEXT -->
   <div class="sec">Your Text</div>
   <div class="card">
-    <textarea id="textInput" placeholder="Type or paste any English text here… audiobooks, bedtime stories, articles — no character limit."></textarea>
+    <textarea id="textInput" placeholder="Type or paste any English text here… supports up to 20,000 words (120,000 chars). Perfect for full audiobooks!"></textarea>
     <div class="meta-row">
       <span class="char-pill" id="charPill">0 chars</span>
-      <span class="free-note">✦ FREE · No API key · Unlimited</span>
+      <span class="free-note">✦ FREE · No API key · Up to 20,000 words</span>
     </div>
   </div>
 
@@ -435,7 +435,7 @@ const VOICES = [
   {id:"en-za", name:"South African",  accent:"Other", flag:"🇿🇦"},
 ];
 
-const CHUNK_SIZE = 2000; // safe per-request limit
+const CHUNK_SIZE = 2500; // safe per-request limit
 
 let selectedVoice = "en-us";
 let history = [];
@@ -470,9 +470,10 @@ function updateSpeed(v){
 
 document.getElementById('textInput').addEventListener('input',function(){
   const n=this.value.length;
+  const words=this.value.trim()===''?0:this.value.trim().split(/\s+/).length;
   const p=document.getElementById('charPill');
-  p.textContent=n.toLocaleString()+' chars';
-  p.className='char-pill'+(n>48000?' warn':'');
+  p.textContent=words.toLocaleString()+' words · '+n.toLocaleString()+' chars';
+  p.className='char-pill'+(n>118000?' warn':'');
 });
 
 // Split text into chunks at sentence boundaries
