@@ -416,14 +416,12 @@ footer{background:var(--s1);border-top:1px solid var(--border);margin-top:60px;p
 <script>
 const SERVER = window.location.origin;
 
-// Speed map: slider 1-5 → gTTS slow(true/false) + display label
-// gTTS only supports normal and slow — we simulate 5 steps via backend
 const SPEED_MAP = {
-  1: {slow:true,  label:'0.5× Slowest', send:'very_slow'},
-  2: {slow:true,  label:'0.75× Slow',   send:'slow'},
-  3: {slow:false, label:'1.0× Normal',  send:'normal'},
-  4: {slow:false, label:'1.25× Fast',   send:'fast'},
-  5: {slow:false, label:'1.5× Fastest', send:'very_fast'},
+  1: {slow:true,  label:'0.5× Slowest'},
+  2: {slow:true,  label:'0.75× Slow'},
+  3: {slow:false, label:'1.0× Normal'},
+  4: {slow:false, label:'1.25× Fast'},
+  5: {slow:false, label:'1.5× Fastest'},
 };
 
 const VOICES = [
@@ -436,6 +434,8 @@ const VOICES = [
   {id:"en-nz", name:"New Zealand",    accent:"Other", flag:"🇳🇿"},
   {id:"en-za", name:"South African",  accent:"Other", flag:"🇿🇦"},
 ];
+
+const CHUNK_SIZE = 2000; // safe per-request limit
 
 let selectedVoice = "en-us";
 let history = [];
@@ -475,75 +475,123 @@ document.getElementById('textInput').addEventListener('input',function(){
   p.className='char-pill'+(n>48000?' warn':'');
 });
 
-async function convert(){
-  const text=document.getElementById('textInput').value.trim();
-  if(!text){toast('⚠ Enter some text first');return}
-  const btn=document.getElementById('convertBtn');
-  btn.disabled=true;
+// Split text into chunks at sentence boundaries
+function splitText(text, size) {
+  const chunks = [];
+  while (text.length > size) {
+    let splitAt = size;
+    // Try to find a good split point — sentence end preferred
+    const seps = ['. ', '! ', '? ', '\n', '; ', ', ', ' '];
+    for (const sep of seps) {
+      const idx = text.lastIndexOf(sep, size);
+      if (idx > size * 0.5) { splitAt = idx + sep.length; break; }
+    }
+    chunks.push(text.slice(0, splitAt).trim());
+    text = text.slice(splitAt).trim();
+  }
+  if (text) chunks.push(text);
+  return chunks;
+}
+
+// Merge multiple MP3 ArrayBuffers into one Blob
+// Simple concatenation — works for gTTS MP3s
+function mergeMP3Blobs(blobs) {
+  return new Blob(blobs, { type: 'audio/mpeg' });
+}
+
+async function convert() {
+  const text = document.getElementById('textInput').value.trim();
+  if (!text) { toast('⚠ Enter some text first'); return; }
+
+  const btn = document.getElementById('convertBtn');
+  btn.disabled = true;
   document.getElementById('result').classList.remove('show');
-  showProg('Generating audio…',20);
 
   const speedStep = parseInt(document.getElementById('speedRange').value);
   const speedObj  = SPEED_MAP[speedStep];
+  const chunks    = splitText(text, CHUNK_SIZE);
+  const total     = chunks.length;
 
-  try{
-    showProg('Connecting to Google TTS…',50);
-    const res = await fetch(SERVER+'/synthesize',{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({text, voice:selectedVoice, slow:speedObj.slow, speed:speedObj.send}),
-      signal:AbortSignal.timeout(60000)
-    });
-    showProg('Processing audio…',85);
-    if(!res.ok){
-      const err=await res.json().catch(()=>({error:'Server error '+res.status}));
-      throw new Error(err.error||'Server error');
+  showProg(`Preparing ${total} chunk${total>1?'s':''}…`, 5);
+
+  const audioBlobs = [];
+
+  try {
+    for (let i = 0; i < chunks.length; i++) {
+      const pct = Math.round(((i) / total) * 85) + 5;
+      showProg(`Processing chunk ${i+1} of ${total}…`, pct);
+
+      const res = await fetch(SERVER + '/synthesize', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ text: chunks[i], voice: selectedVoice, slow: speedObj.slow }),
+        signal: AbortSignal.timeout(25000)
+      });
+
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({ error: 'Server error ' + res.status }));
+        throw new Error(err.error || 'Server error');
+      }
+
+      const blob = await res.blob();
+      audioBlobs.push(blob);
     }
-    lastBlob=await res.blob();
-    const url=URL.createObjectURL(lastBlob);
-    showProg('Done!',100);
-    setTimeout(hideProg,350);
-    document.getElementById('audioEl').src=url;
+
+    showProg('Merging audio…', 92);
+    lastBlob = mergeMP3Blobs(audioBlobs);
+    const url = URL.createObjectURL(lastBlob);
+
+    showProg('Done!', 100);
+    setTimeout(hideProg, 400);
+
+    document.getElementById('audioEl').src = url;
     document.getElementById('result').classList.add('show');
-    const vname=VOICES.find(v=>v.id===selectedVoice)?.name||selectedVoice;
-    document.getElementById('dlBtn').onclick=()=>doDownload(lastBlob,vname);
-    doDownload(lastBlob,vname);
-    const kb=(lastBlob.size/1024).toFixed(1);
-    document.getElementById('rmeta').innerHTML=`
+
+    const vname = VOICES.find(v=>v.id===selectedVoice)?.name || selectedVoice;
+    document.getElementById('dlBtn').onclick = () => doDownload(lastBlob, vname);
+    doDownload(lastBlob, vname);
+
+    const kb = (lastBlob.size / 1024).toFixed(1);
+    document.getElementById('rmeta').innerHTML = `
       <div class="mi"><span>Accent</span><strong>${vname}</strong></div>
       <div class="mi"><span>Speed</span><strong>${speedObj.label}</strong></div>
+      <div class="mi"><span>Chunks</span><strong>${total}</strong></div>
       <div class="mi"><span>Size</span><strong>${kb} KB</strong></div>
       <div class="mi"><span>Chars</span><strong>${text.length.toLocaleString()}</strong></div>
       <div class="mi"><span>Cost</span><strong>$0.00 🎉</strong></div>`;
-    addHistory(text,vname,speedObj.label,lastBlob);
+
+    addHistory(text, vname, speedObj.label, lastBlob);
     toast('✦ MP3 downloaded!');
-  }catch(e){
+
+  } catch(e) {
     hideProg();
-    toast('✖ '+e.message.slice(0,55));
-  }finally{
-    btn.disabled=false;
+    toast('✖ ' + e.message.slice(0, 60));
+  } finally {
+    btn.disabled = false;
   }
 }
 
-function doDownload(blob,name){
-  const url=URL.createObjectURL(blob);
-  const a=document.createElement('a');
-  a.href=url;a.download=`voicecraft-${name.replace(/\s+/g,'-').toLowerCase()}-${Date.now()}.mp3`;
-  document.body.appendChild(a);a.click();document.body.removeChild(a);
-  setTimeout(()=>URL.revokeObjectURL(url),5000);
+function doDownload(blob, name){
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `voicecraft-${name.replace(/\s+/g,'-').toLowerCase()}-${Date.now()}.mp3`;
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  setTimeout(() => URL.revokeObjectURL(url), 5000);
 }
-function showProg(msg,pct){
-  document.getElementById('progWrap').classList.add('show');
-  document.getElementById('progTxt').textContent=msg;
-  document.getElementById('progBar').style.width=pct+'%';
-}
-function hideProg(){document.getElementById('progWrap').classList.remove('show')}
 
-function addHistory(text,voice,speed,blob){
-  history.unshift({text,voice,speed,blob,time:new Date()});
-  document.getElementById('hlist').innerHTML=history.map((h,i)=>{
-    const s=h.text.length>65?h.text.slice(0,62)+'…':h.text;
-    const t=h.time.toLocaleTimeString('en',{hour:'2-digit',minute:'2-digit'});
+function showProg(msg, pct){
+  document.getElementById('progWrap').classList.add('show');
+  document.getElementById('progTxt').textContent = msg;
+  document.getElementById('progBar').style.width = pct + '%';
+}
+function hideProg(){ document.getElementById('progWrap').classList.remove('show'); }
+
+function addHistory(text, voice, speed, blob){
+  history.unshift({text, voice, speed, blob, time: new Date()});
+  document.getElementById('hlist').innerHTML = history.map((h,i) => {
+    const s = h.text.length > 65 ? h.text.slice(0,62) + '…' : h.text;
+    const t = h.time.toLocaleTimeString('en', {hour:'2-digit', minute:'2-digit'});
     return `<div class="hi">
       <span class="hn">${String(i+1).padStart(2,'0')}</span>
       <div class="hinfo">
@@ -555,17 +603,18 @@ function addHistory(text,voice,speed,blob){
   }).join('');
 }
 
-function openModal(id){document.getElementById('modal-'+id).classList.add('open')}
-function closeModal(id){document.getElementById('modal-'+id).classList.remove('open')}
-document.querySelectorAll('.modal-overlay').forEach(m=>{
-  m.addEventListener('click',e=>{if(e.target===m)m.classList.remove('open')})
+function openModal(id){ document.getElementById('modal-'+id).classList.add('open'); }
+function closeModal(id){ document.getElementById('modal-'+id).classList.remove('open'); }
+document.querySelectorAll('.modal-overlay').forEach(m => {
+  m.addEventListener('click', e => { if(e.target===m) m.classList.remove('open'); });
 });
 
 function toast(msg){
-  const el=document.getElementById('toast');
-  el.textContent=msg;el.classList.add('show');
-  setTimeout(()=>el.classList.remove('show'),2800);
+  const el = document.getElementById('toast');
+  el.textContent = msg; el.classList.add('show');
+  setTimeout(() => el.classList.remove('show'), 2800);
 }
+
 </script>
 </body>
 </html>
