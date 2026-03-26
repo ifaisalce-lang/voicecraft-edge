@@ -36,7 +36,7 @@ def synthesize():
     if not text:
         return jsonify({"error": "No text provided"}), 400
     # Each chunk max 3000 chars — safe limit
-    if len(text) > 3000:
+    if len(text) > 1500:
         return jsonify({"error": "Chunk too large (max 3000 chars per chunk)"}), 400
 
     lang = voice if voice.startswith("en-") else "en-us"
